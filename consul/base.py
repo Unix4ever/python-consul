@@ -1688,6 +1688,8 @@ class Consul(object):
             dc = dc or self.agent.dc
             if dc:
                 params['dc'] = dc
+            if self.agent.token:
+                params['token'] = self.agent.token
             data = {}
             if name:
                 data['name'] = name
@@ -1725,6 +1727,8 @@ class Consul(object):
             dc = dc or self.agent.dc
             if dc:
                 params['dc'] = dc
+            if self.agent.token:
+                params['token'] = self.agent.token
             return self.agent.http.put(
                 CB.bool(),
                 '/v1/session/destroy/%s' % session_id,
@@ -1770,6 +1774,8 @@ class Consul(object):
                 params['index'] = index
                 if wait:
                     params['wait'] = wait
+            if self.agent.token:
+                params['token'] = self.agent.token
             consistency = consistency or self.agent.consistency
             if consistency in ('consistent', 'stale'):
                 params[consistency] = '1'
@@ -1800,6 +1806,8 @@ class Consul(object):
                 params['index'] = index
                 if wait:
                     params['wait'] = wait
+            if self.agent.token:
+                params['token'] = self.agent.token
             consistency = consistency or self.agent.consistency
             if consistency in ('consistent', 'stale'):
                 params[consistency] = '1'
@@ -1837,6 +1845,8 @@ class Consul(object):
                 params['index'] = index
                 if wait:
                     params['wait'] = wait
+            if self.agent.token:
+                params['token'] = self.agent.token
             consistency = consistency or self.agent.consistency
             if consistency in ('consistent', 'stale'):
                 params[consistency] = '1'
@@ -1859,6 +1869,8 @@ class Consul(object):
             dc = dc or self.agent.dc
             if dc:
                 params['dc'] = dc
+            if self.agent.token:
+                params['token'] = self.agent.token
             return self.agent.http.put(
                 CB.json(one=True, allow_404=False),
                 '/v1/session/renew/%s' % session_id,
